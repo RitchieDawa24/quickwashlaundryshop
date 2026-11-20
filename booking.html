@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QuickWash Booking</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>*{box-sizing:border-box}body{margin:0;padding:12px 14px;font-family:'Poppins',system-ui,sans-serif;color:#e6f7ff;background:transparent}h2{margin:0;font-size:1.4rem;font-weight:700;color:#7dd3fc}.sub{margin:2px 0 14px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.25);font-size:.82rem}a{color:#22d3ee;font-weight:600}:focus-visible{outline:2px solid #22d3ee;outline-offset:2px}label{display:block;margin-bottom:4px;font-size:.72rem;font-weight:600;color:#7dd3fc}input,select,textarea{width:100%;padding:11px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.25);background:rgba(3,31,58,.6);color:#fff;font:500 .9rem 'Poppins',sans-serif}input::placeholder,textarea::placeholder{color:rgba(230,247,255,.45)}textarea{min-height:86px;resize:vertical}.g{display:grid;grid-template-columns:1fr 1fr;gap:12px}.f{grid-column:1/-1}.btn{margin-top:14px;width:100%;padding:13px;border:0;border-radius:12px;background:linear-gradient(90deg,#22d3ee,#2563eb);color:#021526;font:700 .95rem 'Poppins',sans-serif;cursor:pointer}.btn:hover{filter:brightness(1.1)}.ok{display:none;margin-top:14px;padding:14px;border-radius:14px;background:rgba(74,222,128,.15);border:1px solid rgba(74,222,128,.5);font-size:.85rem}@media(max-width:560px){.g{grid-template-columns:1fr}}</style>
+</head>
+<body>
+<h2>📅 Online Booking &amp; Pickup Form</h2>
+<div class="sub">Schedule your laundry pickup in just a few clicks.</div>
+<form id="bf" class="g">
+  <div><label for="bn">Full Name</label><input id="bn" required placeholder="Juan Dela Cruz"></div>
+  <div><label for="bp">Phone Number</label><input id="bp" type="tel" required placeholder="09XX XXX XXXX"></div>
+  <div><label for="bs">Service Type</label><select id="bs"><option>Wash &amp; Fold</option><option>Wash &amp; Iron</option><option>Dry Cleaning</option><option>Comforters &amp; Heavy Items</option></select></div>
+  <div><label for="bd">Preferred Pickup Date</label><input id="bd" type="date" required></div>
+  <div class="f"><label for="ba">Pickup Address</label><textarea id="ba" required placeholder="Enter street address and landmark…"></textarea></div>
+  <div class="f"><button class="btn" type="submit" style="margin-top:0">Confirm Laundry Booking</button></div>
+</form>
+<div class="ok" id="ok"></div>
+<script>
+var $=function(i){return document.getElementById(i)};
+$('bd').min=new Date().toISOString().split('T')[0];
+function esc(s){return s.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+$('bf').onsubmit=function(e){
+  e.preventDefault();
+  var n=$('bn').value.trim(),p=$('bp').value.trim(),s=$('bs').value,d=$('bd').value,a=$('ba').value.trim();
+  var body='Laundry booking\nName: '+n+'\nPhone: '+p+'\nService: '+s+'\nPickup date: '+d+'\nAddress: '+a;
+  var box=$('ok');
+  box.innerHTML='✅ <b>Booking received, '+esc(n)+'!</b><br>'+esc(s)+' pickup on '+esc(d)+". We'll call "+esc(p)+' to confirm.<br><br>To send this booking to the shop now: <a target="_blank" href="mailto:ritchiedawa24@gmail.com?subject='+encodeURIComponent('QuickWash Booking - '+n)+'&body='+encodeURIComponent(body)+'">email your booking</a> or call 09129978036.';
+  box.style.display='block'; e.target.reset();
+};
+</script>
+</body>
+</html>
