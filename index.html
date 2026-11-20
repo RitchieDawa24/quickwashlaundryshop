@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>QuickWash Laundry Shop</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:linear-gradient(160deg,#0e8fd1 0%,#0a6aa8 35%,#05406b 70%,#031f3a 100%);background-attachment:fixed;overflow-x:hidden}
+#bubbles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.bub{position:absolute;bottom:-80px;border-radius:50%;background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.55),rgba(255,255,255,.08) 60%,rgba(125,211,252,.15));border:1px solid rgba(255,255,255,.3);animation:rise linear infinite}
+@keyframes rise{to{transform:translateY(-115vh) translateX(var(--dx))}}
+.app{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:16px;display:grid;gap:16px}
+.layout{display:grid;grid-template-columns:190px 1fr 190px;gap:16px}
+iframe{display:block;width:100%;border:1px solid rgba(255,255,255,.25);border-radius:22px;background:rgba(255,255,255,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);box-shadow:0 8px 28px rgba(0,20,50,.25)}
+#header{height:150px}#navbar,#links,#content{height:560px}#footer{height:64px}
+@media(max-width:860px){.layout{grid-template-columns:1fr}#navbar{height:170px}#content{height:780px}#links{height:360px}#header{height:170px}}
+@media(prefers-reduced-motion:reduce){.bub{animation:none;opacity:.5}}
+</style>
+</head>
+<body>
+<div id="bubbles" aria-hidden="true"></div>
+<div class="app">
+  <iframe id="header" src="header.html" title="Header"></iframe>
+  <div class="layout">
+    <iframe id="navbar" src="navbar.html" title="Menu"></iframe>
+    <iframe id="content" name="content" src="home.html" title="Page content"></iframe>
+    <iframe id="links" src="links.html" title="Rates"></iframe>
+  </div>
+  <iframe id="footer" src="footer.html" title="Footer"></iframe>
+</div>
+<script>
+var bw=document.getElementById('bubbles');
+for(var i=0;i<22;i++){var b=document.createElement('div'),z=10+Math.random()*50;b.className='bub';
+b.style.cssText='width:'+z+'px;height:'+z+'px;left:'+Math.random()*100+'%;--dx:'+(Math.random()*80-40)+'px;animation-duration:'+(9+Math.random()*14)+'s;animation-delay:'+(-Math.random()*20)+'s';bw.appendChild(b);}
+</script>
+</body>
+</html>
